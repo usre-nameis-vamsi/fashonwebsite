@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .signup-container {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 420px;
+            max-width: 100%;
+        }
+
+        .signup-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 26px;
+            color: #333;
+        }
+
+        .form-control {
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .form-control label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .form-control input:focus {
+            outline: none;
+            border-color: #f5576c;
+        }
+
+        .form-control .error-message {
+            color: red;
+            font-size: 0.875rem;
+            position: absolute;
+            top: 100%;
+            left: 0;
+        }
+
+        .signup-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #f5576c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .signup-btn:hover {
+            background-color: #d4464e;
+        }
+
+        .additional-options {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .additional-options a {
+            text-decoration: none;
+            color: #f5576c;
+            font-weight: bold;
+        }
+
+        .additional-options a:hover {
+            color: #d4464e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form id="signup-form">
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                <div class="error-message" id="username-error"></div>
+            </div>
+
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div class="error-message" id="email-error"></div>
+            </div>
+
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Create a password" required>
+                <div class="error-message" id="password-error"></div>
+            </div>
+
+            <div class="form-control">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                <div class="error-message" id="confirm-password-error"></div>
+            </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+
+            <div class="additional-options">
+                <p>Already have an account? <a href="file:///C:/Users/vamsi/OneDrive/Documents/JFSD/fashion%20website/fontawesome-free-5.15.3-web/login.html">Login here</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const signupForm = document.getElementById('signup-form');
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+
+        const usernameError = document.getElementById('username-error');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+        const confirmPasswordError = document.getElementById('confirm-password-error');
+
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Clear error messages
+            usernameError.textContent = '';
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            confirmPasswordError.textContent = '';
+
+            // Validation
+            const usernameValue = usernameInput.value.trim();
+            const emailValue = emailInput.value.trim();
+            const passwordValue = passwordInput.value.trim();
+            const confirmPasswordValue = confirmPasswordInput.value.trim();
+            let isValid = true;
+
+            if (usernameValue.length < 3) {
+                usernameError.textContent = 'Username must be at least 3 characters';
+                isValid = false;
+            }
+
+            if (!validateEmail(emailValue)) {
+                emailError.textContent = 'Please enter a valid email';
+                isValid = false;
+            }
+
+            if (passwordValue.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters';
+                isValid = false;
+            }
+
+            if (passwordValue !== confirmPasswordValue) {
+                confirmPasswordError.textContent = 'Passwords do not match';
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Simulate form submission
+                alert('Signup successful!');
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
+
+</body>
+</html>

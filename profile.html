@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Display</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .profile-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .profile-info img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid #6c63ff;
+            cursor: pointer;
+        }
+
+        .profile-info input[type="file"] {
+            display: none;
+        }
+
+        .profile-info label {
+            cursor: pointer;
+        }
+
+        .profile-info h3 {
+            margin-bottom: 8px;
+            font-size: 22px;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .profile-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .profile-details, .edit-form {
+            margin-bottom: 30px;
+        }
+
+        .detail-item {
+            margin-bottom: 18px;
+        }
+
+        .detail-item label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+            font-size: 16px;
+        }
+
+        .detail-item span {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .edit-form {
+            display: none;
+        }
+
+        .edit-form input[type="text"], .edit-form input[type="email"], .edit-form input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-edit, .btn-save {
+            width: 100%;
+            padding: 12px;
+            background-color: #6c63ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-edit:hover, .btn-save:hover {
+            background-color: #5a53e3;
+        }
+
+        .btn-save {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                width: 90%;
+                padding: 30px;
+            }
+
+            .btn-edit, .btn-save {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="profile-info">
+            <label for="profileImageInput">
+                <img id="profileImage" src="profile.jpg" alt="User Profile Picture">
+            </label>
+            <input type="file" id="profileImageInput" accept="image/*">
+            <h3 id="userName">John Doe</h3>
+            <p id="userEmail">john.doe@example.com</p>
+        </div>
+
+        <h2>Profile Details</h2>
+        <div class="profile-details">
+            <div class="detail-item">
+                <label>Full Name:</label>
+                <span id="fullName">John Doe</span>
+            </div>
+            <div class="detail-item">
+                <label>Phone Number:</label>
+                <span id="phoneNumber">123-456-7890</span>
+            </div>
+            <div class="detail-item">
+                <label>Email Address:</label>
+                <span id="emailAddress">john.doe@example.com</span>
+            </div>
+            <div class="detail-item">
+                <label>Address:</label>
+                <span id="address">123 Main St, Cityville</span>
+            </div>
+            <div class="detail-item">
+                <label>PIN Code:</label>
+                <span id="pinCode">123456</span>
+            </div>
+            <div class="detail-item">
+                <label>City:</label>
+                <span id="city">Cityville</span>
+            </div>
+            <div class="detail-item">
+                <label>State:</label>
+                <span id="state">Stateville</span>
+            </div>
+        </div>
+
+        <!-- Edit Form -->
+        <div class="edit-form" id="editForm">
+            <input type="text" id="editFullName" placeholder="Full Name">
+            <input type="tel" id="editPhoneNumber" placeholder="Phone Number">
+            <input type="email" id="editEmailAddress" placeholder="Email Address">
+            <input type="text" id="editAddress" placeholder="Address">
+            <input type="text" id="editPinCode" placeholder="PIN Code">
+            <input type="text" id="editCity" placeholder="City">
+            <input type="text" id="editState" placeholder="State">
+        </div>
+
+        <button class="btn-edit" id="editBtn">Edit Profile</button>
+        <button class="btn-save" id="saveBtn">Save Profile</button>
+    </div>
+
+    <script>
+        const editBtn = document.getElementById('editBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const editForm = document.getElementById('editForm');
+        const profileDetails = document.querySelector('.profile-details');
+        const profileImageInput = document.getElementById('profileImageInput');
+        const profileImage = document.getElementById('profileImage');
+
+        editBtn.addEventListener('click', () => {
+            profileDetails.style.display = 'none';
+            editForm.style.display = 'block';
+            editBtn.style.display = 'none';
+            saveBtn.style.display = 'block';
+
+            // Pre-fill the form with current data
+            document.getElementById('editFullName').value = document.getElementById('fullName').textContent;
+            document.getElementById('editPhoneNumber').value = document.getElementById('phoneNumber').textContent;
+            document.getElementById('editEmailAddress').value = document.getElementById('emailAddress').textContent;
+            document.getElementById('editAddress').value = document.getElementById('address').textContent;
+            document.getElementById('editPinCode').value = document.getElementById('pinCode').textContent;
+            document.getElementById('editCity').value = document.getElementById('city').textContent;
+            document.getElementById('editState').value = document.getElementById('state').textContent;
+        });
+
+        saveBtn.addEventListener('click', () => {
+            // Save updated values
+            document.getElementById('fullName').textContent = document.getElementById('editFullName').value;
+            document.getElementById('phoneNumber').textContent = document.getElementById('editPhoneNumber').value;
+            document.getElementById('emailAddress').textContent = document.getElementById('editEmailAddress').value;
+            document.getElementById('address').textContent = document.getElementById('editAddress').value;
+            document.getElementById('pinCode').textContent = document.getElementById('editPinCode').value;
+            document.getElementById('city').textContent = document.getElementById('editCity').value;
+            document.getElementById('state').textContent = document.getElementById('editState').value;
+
+            profileDetails.style.display = 'block';
+            editForm.style.display = 'none';
+            editBtn.style.display = 'block';
+            saveBtn.style.display = 'none';
+        });
+
+        // Profile image change logic
+        profileImageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+</body>
+</html>

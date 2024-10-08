@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <style>
+        /* Style for the search box container */
+        .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        /* Style for the search input */
+        .search-box input[type="search"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            width: 250px;
+            outline: none;
+        }
+
+        /* Style for the search button */
+        .search-box button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #FF6347; /* Custom color (tomato red) */
+            border: 1px solid #FF6347;
+            border-radius: 0 5px 5px 0;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for the button */
+        .search-box button:hover {
+            background-color: #FF4500; /* Darker shade for hover */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" id="logo">
+            <img src="C:\Users\vamsi\OneDrive\Documents\JFSD\fashion website\images\logo.png" alt="YourLogo" class="logo-image">
+        </a>
+        <nav class="navbar">
+            <a href="#">home</a>
+            <a href="#">contact</a>
+            <!-- Added Login and Signup buttons -->
+            <a href="index.html" class="btn-login">LogOut</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-bar"></div>
+            <div class="fas fa-shopping-cart" id="shop-cart"></div>
+            <div class="fas fa-search" id="search-bar"></div>
+            <!-- Search Box -->
+            <div class="search-box">
+                <input type="search" id="search-input" placeholder="search here">
+                <button id="search-button" onclick="searchProducts()">Search</button>
+            </div>
+
+            <!-- Add Profile button here -->
+            <div class="fas fa-user" id="profile-button" onclick="goToProfile()"></div>
+        </div>
+
+        <!-- shopping cart -->
+        <div class="shopping-cart">
+            <div class="shopping-box">
+                <i class="fas fa-times"></i>
+                <img src="images/shirt1.png" alt="">
+                <div class="shop-content">
+                    <h3>online shopping</h3>
+                    <span class="quantity">1</span>
+                    <span class="multiply">*</span>
+                    <span class="multiply">$3.00</span>
+                </div>
+            </div>
+        </div>
+        <!-- shopping cart ended -->
+    </header>
+
+    <!-- main background image -->
+    <div class="main-background1">
+        <div class="left-back"></div>
+        <div class="left-back">
+            <div class="left-inner">
+                <div class="right-content">
+                    <h1>Handloom <br> collection</h1>
+                    <p>Handloom is a traditional weaving technique that produces fabric using manually operated looms. Each piece is a unique work of art, crafted with skill and dedication by artisans</p>
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="right-content">
+                    <div class="inner-main-content">
+                        <h1>Special offer</h1>
+                        <span>Available</span>
+                        <a href="products.html" class="shopnow-btn">Shop now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main background image ended -->
+
+    <!-- gallery -->
+    <div class="gallery">
+        <h1>our gallery</h1>
+        <div class="main-gallery">
+            <div class="inner-gallery">
+                <img src="images/shoes.png" alt="">
+                <img src="images/bag.png" alt="">
+            </div>
+            <div class="inner-gallery">
+                <div class="girl">
+                    <img src="images/girlsw.png" alt="">
+                </div>
+            </div>
+            <div class="inner-gallery">
+                <img src="images/black men.png" alt="">
+                <img src="images/glasses.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- gallery ended -->
+
+    <!-- banner start -->
+    <div class="banner">
+        <div class="inner-banner">
+            <img src="images/banner2.png" alt="">
+        </div>
+        <div class="inner-banner">
+            <h1>we offer brand new style</h1>
+            <p>"Explore our handloom shirts, Sarees, Blankets, Kurthas, Bags collections, where tradition meets contemporary design."</p>
+            <a href="#" id="shope-now">shop now</a>
+        </div>
+    </div>
+    <!-- banner ended -->
+
+    <div class="products-type">
+        <h1>products type</h1>
+        <div class="main-product">
+            <div class="inner-product">
+                <img src="images/boy.png" alt="">
+                <a href="#" id="shop-now">shop now</a>
+            </div>
+            <div class="inner-product">
+                <img src="images/girl.png" alt="">
+                <a href="#" id="shop-now">shop now</a>
+            </div>
+            <div class="inner-product">
+                <img src="images/baby.png" alt="">
+                <a href="#" id="shop-now">shop now</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToProfile() {
+            window.location.href = "profile.html";
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
